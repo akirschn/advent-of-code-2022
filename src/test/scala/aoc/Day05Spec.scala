@@ -1,18 +1,35 @@
 package aoc
 
+import aoc.FileUtils.load
+import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.verbs.ShouldVerb
-import org.scalatest.wordspec.AnyWordSpec
 
-class Day05Spec extends AnyWordSpec with Matchers with ShouldVerb {
+class Day05Spec extends AnyFlatSpec with Matchers {
 
-  "it" should {
-    "detect vents" in {
-      Day05.detectVents(FileUtils.load("/day05-sample.txt")) shouldBe 5
-      Day05.detectVents(FileUtils.load("/day05.txt")) shouldBe 5280
+  "The code for the day" should "solve the puzzle correctly" in {
 
-      Day05.detectVents(FileUtils.load("/day05-sample.txt"), true) shouldBe 12
-      Day05.detectVents(FileUtils.load("/day05.txt"), true) shouldBe 16716
-    }
+    val sampleStack = List(
+      List('Z', 'N'),
+      List('M', 'C', 'D'),
+      List('P')
+    )
+
+    val stack = List(
+      List('W', 'B', 'D', 'N', 'C', 'F', 'J'),
+      List('P', 'Z', 'V', 'Q', 'L', 'S', 'T'),
+      List('P', 'Z', 'B', 'G', 'J', 'T'),
+      List('D', 'T', 'L', 'J', 'Z', 'B', 'H', 'C'),
+      List('G', 'V', 'B', 'J', 'S'),
+      List('P', 'S', 'Q'),
+      List('B', 'V', 'D', 'F', 'L', 'M', 'P', 'N'),
+      List('P', 'S', 'M', 'F', 'B', 'D', 'L', 'R'),
+      List('V', 'D', 'T', 'R')
+    )
+
+    Day05.solvePartOne(load("/day05-sample.txt"), sampleStack) shouldBe "CMZ"
+    Day05.solvePartOne(load("/day05.txt"), stack) shouldBe "LBLVVTVLP"
+
+    Day05.solvePartTwo(load("/day05-sample.txt"), sampleStack) shouldBe "MCD"
+    Day05.solvePartTwo(load("/day05.txt"), stack) shouldBe "TPFFBDRJD"
   }
 }
